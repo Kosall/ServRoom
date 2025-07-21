@@ -1,0 +1,13 @@
+package com.piseth.java.school.roomservice.problem.factory;
+
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
+import org.springframework.web.server.ServerWebExchange;
+
+public interface ProblemDetailFactory {
+	ProblemDetail create(HttpStatus status,String message,ServerWebExchange exchange);
+	ProblemDetail create(HttpStatus status,String message,ServerWebExchange exchange,Map<String, String> properties);
+	ProblemDetail create(HttpStatus status,String message,String errorCode,ServerWebExchange exchange);
+}

@@ -8,5 +8,14 @@ logging:
   level:
     root: INFO
     com.piseth.java.school: DEBUG
+
+#springdoc:
+#   api-docs:
+#       path: localhosh:8065
+#   swagger-ui:
+#       path: /swagger-ui/index.html
+#       operationsSorter: method
+#       disable-swagger-default-url: false
+
 server:
   port: 8065
