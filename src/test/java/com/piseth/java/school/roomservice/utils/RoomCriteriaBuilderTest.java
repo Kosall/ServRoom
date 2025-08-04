@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -206,5 +208,26 @@ public class RoomCriteriaBuilderTest {
 		Sort sort = RoomCriteriaBuilder.sort(filterDTO);
 		assertThat(sort.getOrderFor("name")).isNotNull();
 		assertThat(sort.getOrderFor("name").getDirection()).isEqualTo(Sort.Direction.ASC);
+	}
+	@Test
+	 void sortBy_descTest() {
+		RoomFilterDTO filterDTO=new RoomFilterDTO();
+		filterDTO.setName("Nita");
+		filterDTO.setDirection("as");
+		Sort sort = RoomCriteriaBuilder.sort(filterDTO);
+		assertThat(sort.getOrderFor("name")).isNotNull();
+		assertThat(sort.getOrderFor("name").getDirection()).isEqualTo(Sort.Direction.DESC);
+	}
+	@Test
+	 void sortBy_Null_Price_priceOperationTest() 
+	{
+		RoomFilterDTO filterDTO=new RoomFilterDTO();
+		filterDTO.setPriceOperation(null);
+		Sort sort=RoomCriteriaBuilder.sort(filterDTO);
+		assertThat(sort.getOrderFor("priceOperation")).isNull();
+		assertThat(sort.getOrderFor("attributes.price")).isNull();
+		
+		
+		
 	}
 }

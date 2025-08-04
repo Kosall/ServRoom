@@ -25,8 +25,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(RoomNotFoundException.class)
 	public Mono<ProblemDetail> handleRoomNotFound(RoomNotFoundException e,ServerWebExchange exchange){
 		log.warn("Room not found : {}",e.getMessage());
-//		ProblemDetail forStatusAndDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
-//		forStatusAndDetail.setTitle(ErrorCode.NOT_FOUND.name());
+
 		return Mono.just(factory.create(HttpStatus.NOT_FOUND,
 				e.getMessage(),
 				ErrorCode.NOT_FOUND.name(),
@@ -36,8 +35,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(WebExchangeBindException.class)
 	public Mono<ProblemDetail> handleConstraintViolation(WebExchangeBindException e,ServerWebExchange exchange){
 		log.warn("Constraint violation : {}",e.getMessage());
-//		ProblemDetail forStatusAndDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
-//		forStatusAndDetail.setTitle(ErrorCode.CONSTRAINT_VIOLATION.name());
+
 		return Mono.just(factory.create(HttpStatus.BAD_REQUEST,
 				e.getMessage(),
 				ErrorCode.CONSTRAINT_VIOLATION.name(), 

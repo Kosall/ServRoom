@@ -64,11 +64,7 @@ public class RoomController {
 		return roomService.findRoomByName(name);
 				
 	}
-//	@GetMapping("search")
-//	public Flux<RoomDTO> getRoomByFilter(@RequestParam Map<String, String>params) {
-//		return roomService.findByFilter(RoomFilterDTOMapper.toRoomFilterDTO(params));
-//				
-//	}
+
 	@GetMapping("/searches")
 	public Flux<RoomDTO> getRoomByFilters(@ModelAttribute RoomFilterDTO dto) {
 		return roomService.findByFilter(dto);
@@ -81,10 +77,11 @@ public class RoomController {
 	}
 	@GetMapping("/paginations")
 	public Mono<ResponseEntity<PageDTO<RoomDTO>>> getRoomByPaginations(@ModelAttribute RoomFilterDTO dto) {
+		
 		return roomService.findByPagination(dto)
-				.map(X->ResponseEntity.ok()
-						.header("X-ray", String.valueOf(X.getTotalElement()))
-						.body(X));
+				.map(x->ResponseEntity.ok()
+						.header("X-ray", String.valueOf(x.getTotalElement()))
+						.body(x));
 						
 				
 	}
